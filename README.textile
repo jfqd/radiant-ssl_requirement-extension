@@ -1,6 +1,6 @@
 h1. SSL Requirement
 
-This extension adds ssl requirement to your admin pages.
+This extension adds ssl requirement to your "radiant":http://github.com/radiant/radiant admin pages.
 
 h2. Installation
 
@@ -10,24 +10,23 @@ git clone http://github.com/jfqd/radiant-ssl_requirement-extension vendor/extens
 
 (The original ssl_requirement plugin from David Heinemeier Hansson is already included - you do not need to add it.)
 
-No rake tasks are needed.
+No rake tasks needed.
 
 Add the ssl certificate to apache or whatever you use as a webserver. Restart webserver, restart application server - you are done.
 
 h2. Features
 
-If you use the "shared_layout":http://github.com/radiant/radiant-share-layouts-extension/ extension and want to use ssl with your own extension put this into your extension.rb file under activate:
+If you use the "shared_layout":http://github.com/radiant/radiant-share-layouts-extension/ extension and want to use ssl with your own extensions put this into your extension.rb file under activate:
 
-<pre><code>
-  # add ssl_required? method
-  if defined?(SslRequirementExtension)
-    MyShinyController.class_eval {
-      include SslRequirement
-      def ssl_required?; local_request? || RAILS_ENV == 'test' ? false : true; end
-    }
-  end
+<pre><code># add ssl_required? method
+if defined?(SslRequirementExtension)
+  MyShinyController.class_eval {
+    include SslRequirement
+    def ssl_required?; local_request? || RAILS_ENV == 'test' ? false : true; end
+  }
+end
 </code></pre>
 
-== Acknowledgments
+h2. Acknowledgments
 
 Thanks to all radiant core members and extensions authors!
