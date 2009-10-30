@@ -18,7 +18,7 @@ h2. Features
 
 If you use the "shared_layout":http://github.com/radiant/radiant-share-layouts-extension/ extension and want to use ssl with your own extension put this into your extension.rb file under activate:
 
-  <pre><code>
+<pre><code>
   # add ssl_required? method
   if defined?(SslRequirementExtension)
     MyShinyController.class_eval {
@@ -26,7 +26,7 @@ If you use the "shared_layout":http://github.com/radiant/radiant-share-layouts-e
       def ssl_required?; local_request? || RAILS_ENV == 'test' ? false : true; end
     }
   end
-  </code></pre>
+</code></pre>
 
 == Acknowledgments
 
