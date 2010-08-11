@@ -1,18 +1,26 @@
 require_dependency 'application_controller'
 
 class SslRequirementExtension < Radiant::Extension
-  version "0.1"
+  version "0.2"
   description "Add ssl requirement to admin pages."
   url "http://github.com/jfqd/radiant-ssl_requirement-extension"
   
   def activate
-    # add ssl requirement to application_contoller
-    ApplicationController.class_eval do
-      include SslRequirement
-      def ssl_required?
-        # you may wanna change this
-        local_request? || RAILS_ENV == 'test' || RAILS_ENV == 'development' ? false : true
-      end
+    # add ssl requirement to admin area
+    if respond_to?(:tab) # 0.9
+      controllers = [ApplicationController, Admin::ResourceController, Admin::PagesController]
+    else
+      controllers = [ApplicationController]
+    end
+    
+    controllers.each do |c|
+      c.class_eval {
+        include SslRequirement
+        def ssl_required?
+          # you may wanna change this
+          local_request? || RAILS_ENV == 'test' || RAILS_ENV == 'development' ? false : true
+        end
+      }
     end
     
     # remove ssl requirement from site_contoller

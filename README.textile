@@ -4,6 +4,8 @@ Created by: Stefan Husch (free2b AT blun DOT org), 2009-10-30
 
 This extension adds ssl requirement to your "radiant":http://github.com/radiant/radiant admin pages.
 
+Tested with 0.8 and 0.9.1
+
 h2. Installation
 
 Starting from your radiant application root directory:
