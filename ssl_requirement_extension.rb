@@ -1,7 +1,7 @@
 require_dependency 'application_controller'
 
 class SslRequirementExtension < Radiant::Extension
-  version "0.2"
+  version "0.3"
   description "Add ssl requirement to admin pages."
   url "http://github.com/jfqd/radiant-ssl_requirement-extension"
   

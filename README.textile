@@ -16,7 +16,13 @@ git clone git://github.com/jfqd/radiant-ssl_requirement-extension vendor/extensi
 
 No rake tasks needed.
 
+The extension should be loaded as early as possible.
+
 Add the ssl certificate to apache or whatever you use as a webserver. Restart webserver, restart application server - you are done.
+
+h2. Compatibility
+
+If you use the sitemap_xml extension, ssl_requirement need to be loaded after it.
 
 h2. Features
 
