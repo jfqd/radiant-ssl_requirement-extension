@@ -10,7 +10,7 @@ h2. Installation
 
 Starting from your radiant application root directory:
 
-git clone git://github.com/jfqd/radiant-ssl_requirement-extension vendor/extensions/ssl_requirement
+git clone git://github.com/jfqd/radiant-ssl_requirement-extension.git vendor/extensions/ssl_requirement
 
 (The original ssl_requirement plugin from David Heinemeier Hansson is already included - you do not need to add it.)
 
@@ -22,7 +22,7 @@ Add the ssl certificate to apache or whatever you use as a webserver. Restart we
 
 h2. Compatibility
 
-If you use the sitemap_xml extension, ssl_requirement need to be loaded after it.
+If you use the "sitemap_xml":http://blog.aissac.ro/radiant/sitemap-xml-extension/ extension, ssl_requirement need to be loaded after it.
 
 h2. Features
 
