@@ -30,6 +30,15 @@ class SslRequirementExtension < Radiant::Extension
         false
       end
     end
+    
+    # add compatibility for the sitemap_xml extension (http://blog.aissac.ro/radiant/sitemap-xml-extension/)
+    if defined?(SitemapXmlExtension)
+      SitemapXmlController.class_eval {
+        def ssl_required?
+          false
+        end
+      }
+    end
 
   end
   
