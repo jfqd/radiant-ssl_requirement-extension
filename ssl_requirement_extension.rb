@@ -40,6 +40,15 @@ class SslRequirementExtension < Radiant::Extension
       }
     end
 
+    # add compatability for the mailer extension
+    if defined?(MailerExtension)
+      MailController.class_eval {
+        def ssl_required?
+          false
+        end
+      }
+    end
+
   end
   
   def deactivate
