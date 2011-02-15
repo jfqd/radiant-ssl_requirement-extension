@@ -1,0 +1,11 @@
+Site:
+    controller: SiteController
+    ssl_required: false
+
+SitemapXmlExtension:
+    controller: SitemapXmlController
+    ssl_required: false
+
+MailerExtension:
+    controller: MailController
+    ssl_required: false

@@ -1,0 +1,7 @@
+not_required:
+    controller: not_required_controller
+    ssl_required: false
+
+required:
+    controller: required_controller
+    ssl_required: true

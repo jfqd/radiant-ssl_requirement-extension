@@ -22,7 +22,7 @@ Add the ssl certificate to apache or whatever you use as a webserver. Restart we
 
 h2. Compatibility
 
-If you use the "sitemap_xml":http://blog.aissac.ro/radiant/sitemap-xml-extension/ or "mailer":https://github.com/radiant/radiant-mailer-extension extensions, ssl_requirement need to be loaded after it.
+Compatability is defined in the compatability.yml. There are a few default compatability settings. To add a new setting, simply add a new entry and specify if SSL is required or not following the same format as those already there.
 
 h2. Features
 
