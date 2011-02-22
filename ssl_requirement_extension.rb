@@ -1,4 +1,5 @@
 require_dependency 'application_controller'
+require 'fileutils'
 
 class SslRequirementExtension < Radiant::Extension
   version "0.4"
@@ -22,9 +23,12 @@ class SslRequirementExtension < Radiant::Extension
       }
     end
     
+    src = File.dirname(__FILE__) + '/ssl_requirement.yml'
+    dest = RAILS_ROOT + '/config/ssl_requirement.yml'
+    FileUtils.mv(src, dest) unless RAILS_ENV == 'test'
+
     reader = CompatabilityReader.new
-    comp_file = File.dirname(__FILE__) + '/compatability.yml'
-    components = reader.read(comp_file)
+    components = reader.read(dest)
 
     components.each do |c|
       if class_exists?(c.controller)
