@@ -25,7 +25,7 @@ class SslRequirementExtension < Radiant::Extension
     
     src = File.dirname(__FILE__) + '/ssl_requirement.yml'
     dest = RAILS_ROOT + '/config/ssl_requirement.yml'
-    FileUtils.mv(src, dest) unless RAILS_ENV == 'test'
+    FileUtils.cp(src, dest) unless RAILS_ENV == 'test'
 
     reader = CompatabilityReader.new
     components = reader.read(dest)
