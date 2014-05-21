@@ -1,7 +1,8 @@
 require_dependency 'application_controller'
+require 'fileutils'
 
 class SslRequirementExtension < Radiant::Extension
-  version "0.3"
+  version "0.4"
   description "Add ssl requirement to admin pages."
   url "http://github.com/jfqd/radiant-ssl_requirement-extension"
   
@@ -17,33 +18,49 @@ class SslRequirementExtension < Radiant::Extension
       c.class_eval {
         include SslRequirement
         def ssl_required?
-          # you may wanna change this
           local_request? || RAILS_ENV == 'test' || RAILS_ENV == 'development' ? false : true
         end
       }
     end
     
-    # remove ssl requirement from site_contoller
-    ApplicationController::SiteController.class_eval do
-      include SslRequirement
-      def ssl_required?
-        false
+    src = File.dirname(__FILE__) + '/ssl_requirement.yml'
+    dest = RAILS_ROOT + '/config/ssl_requirement.yml'
+    FileUtils.cp(src, dest) unless RAILS_ENV == 'test'
+
+    reader = CompatabilityReader.new
+    components = reader.read(dest)
+
+    components.each do |c|
+      if class_exists?(c.controller)
+        klass = Module.const_get(c.controller)
+
+        if c.ssl_required
+          klass.class_eval {
+            def ssl_required?
+              true
+            end
+          }
+        else
+          klass.class_eval {
+            def ssl_required?
+              false
+            end
+          }
+        end
+
       end
     end
-    
-    # add compatibility for the sitemap_xml extension (http://blog.aissac.ro/radiant/sitemap-xml-extension/)
-    if defined?(SitemapXmlExtension)
-      SitemapXmlController.class_eval {
-        def ssl_required?
-          false
-        end
-      }
-    end
-
   end
   
   def deactivate
     # will never happen
   end
   
+  private 
+    def class_exists?(class_name)
+      klass = Module.const_get(class_name)
+        return klass.is_a?(Class)
+      rescue NameError
+        return false
+    end
 end
